@@ -21,11 +21,26 @@ Application **Vite + React** — portfolio **Leo Giraud** (artiste 3D), basée s
 | `npm run build` | Build production + `dist/404.html` (GitHub Pages) |
 | `npm run preview` | Prévisualiser le build |
 
-## Déploiement
+## Déploiement (GitHub Pages)
 
-Comme pour `orbisite.github.io` : hébergement statique (`gh-pages`, Netlify, etc.) avec `base: '/'` ou adapter `vite.config.js` si le site est servi sous un sous-chemin.
+URL publique : **`https://orbisite.github.io/leo-giraud/`** (dépôt projet sous le compte `Orbisite`).
 
-Mettre à jour `canonicalUrl` et `og.url` dans `leo-giraud-api/site.json` avec l’URL réelle du site.
+1. Sur GitHub : **Settings → Pages → Build and deployment → Source : GitHub Actions** (pas « Deploy from a branch »).
+2. Chaque push sur **`main`** lance le workflow **Deploy GitHub Pages** (`.github/workflows/deploy-pages.yml`), qui build avec `VITE_BASE=/leo-giraud/` et publie `dist`.
+
+**Manuellement** (branche `gh-pages`, depuis ta machine avec token GitHub Packages pour `npm ci` / `npm install`) :
+
+```bash
+npm run deploy
+```
+
+**En local**, `npm run dev` et `npm run build` sans variable utilisent **`base: /`** (racine). Pour tester le build « comme en prod » :
+
+```bash
+npm run build:gh && npm run preview
+```
+
+Mettre à jour `canonicalUrl` et `og.url` dans `leo-giraud-api/site.json` avec `https://orbisite.github.io/leo-giraud/`.
 
 ## Dossier du projet
 
