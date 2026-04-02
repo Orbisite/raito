@@ -3,6 +3,7 @@ import { THEME_URL } from '../config/remoteData'
 /**
  * Thèmes couleur (hex + sémantique) et palette résolue pour les blocs.
  * Les clés content* / elevated* / onDark* viennent de theme.json (API) ; voir buildSemanticVars.
+ * `contentScheme` à la racine de theme.json : `"light"` | `"dark"` (navbar / chrome). Si absent : déduit de la luminance de `primary.surface`.
  */
 
 function hexToRgb(hex) {
@@ -89,13 +90,55 @@ const fallbackThemes = {
   },
 }
 
+/** Luminance relative sRGB (WCAG). Au-dessus du seuil ⇒ surface perçue comme claire. */
+function surfaceIsLight(hex) {
+  if (!hex || typeof hex !== 'string') {
+    return false
+  }
+  try {
+    const [r, g, b] = hexToRgb(hex)
+    const lin = (c) => {
+      const x = c / 255
+      return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4
+    }
+    const L = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
+    return L > 0.55
+  } catch {
+    return false
+  }
+}
+
 let remoteThemes = null
+/** `light` | `dark` — lu depuis theme.json ou déduit de primary.surface. */
+let remoteContentScheme = 'dark'
+
+function resolveContentSchemeFromTheme(next) {
+  if (!next || typeof next !== 'object') {
+    return 'dark'
+  }
+  const explicit = next.contentScheme
+  if (explicit === 'light' || explicit === 'dark') {
+    return explicit
+  }
+  const surf = next.primary && typeof next.primary.surface === 'string' ? next.primary.surface : null
+  if (surf && surfaceIsLight(surf)) {
+    return 'light'
+  }
+  return 'dark'
+}
+
+/** Pour `<BlocksThemeProvider contentScheme={…}>` après chargement du thème API. */
+export function getContentScheme() {
+  return remoteContentScheme
+}
 
 export function setRemoteThemes(next) {
   if (!next) {
     remoteThemes = null
+    remoteContentScheme = 'dark'
     return
   }
+  remoteContentScheme = resolveContentSchemeFromTheme(next)
   remoteThemes = {
     primary: { ...fallbackThemes.primary, ...next.primary },
     secondary: { ...fallbackThemes.secondary, ...next.secondary },
@@ -116,24 +159,6 @@ function resolveThemeInput(color) {
   }
   const name = typeof color === 'string' && themes[color] ? color : defaultThemeName
   return { theme: themes[name], blend: blend[name] ?? blend[defaultThemeName] }
-}
-
-/** Luminance relative sRGB (WCAG). Au-dessus du seuil ⇒ surface perçue comme claire. */
-function surfaceIsLight(hex) {
-  if (!hex || typeof hex !== 'string') {
-    return false
-  }
-  try {
-    const [r, g, b] = hexToRgb(hex)
-    const lin = (c) => {
-      const x = c / 255
-      return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4
-    }
-    const L = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
-    return L > 0.55
-  } catch {
-    return false
-  }
 }
 
 const SEMANTIC_DEFAULTS_DARK = {
