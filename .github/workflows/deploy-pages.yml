@@ -1,4 +1,4 @@
-# Déploie sur GitHub Pages : https://orbisite.github.io/leo-giraud/
+# Déploie sur GitHub Pages : https://orbisite.github.io/raito/
 # Réglages dépôt : Settings → Pages → Source « GitHub Actions ».
 name: Deploy GitHub Pages
 
@@ -35,7 +35,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_BASE: /leo-giraud/
+          VITE_BASE: /raito/
 
       - uses: actions/upload-pages-artifact@v3
         with:

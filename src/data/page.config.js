@@ -1,5 +1,5 @@
 /**
- * Portfolio Leo Giraud — blocs variés (navbar floating, galerie, split, stats, CTA strip…).
+ * Portfolio Raito — blocs variés (navbar floating, galerie, split, stats, CTA strip…).
  */
 import { resolveForLocale } from '../utils/localeUtils'
 import { extractContentImages } from '../utils/siteImages'

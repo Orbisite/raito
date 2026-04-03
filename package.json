@@ -1,12 +1,12 @@
 {
-  "name": "leo-giraud",
+  "name": "raito",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/copy-spa-fallback.mjs",
-    "build:gh": "cross-env VITE_BASE=/leo-giraud/ vite build && node scripts/copy-spa-fallback.mjs",
+    "build:gh": "cross-env VITE_BASE=/raito/ vite build && node scripts/copy-spa-fallback.mjs",
     "preview": "vite preview",
     "deploy": "npm run build:gh && gh-pages -d dist"
   },

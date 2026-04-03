@@ -1,16 +1,16 @@
-# leo-giraud
+# raito
 
-Application **Vite + React** — portfolio **Leo Giraud** (artiste 3D), basée sur le [modèle Orbisite](../model) et [`@orbisite/blocks`](https://github.com/Orbisite/blocks) (npm / GitHub Packages).
+Application **Vite + React** — portfolio **Raito** (artiste 3D), basée sur le [modèle Orbisite](../model) et [`@orbisite/blocks`](https://github.com/Orbisite/blocks) (npm / GitHub Packages).
 
 ## Prérequis
 
-- Dépôt [`leo-giraud-api`](../leo-giraud-api) poussé sur GitHub (JSON + images en raw).
+- Dépôt [`raito-api`](../raito-api) poussé sur GitHub (JSON + images en raw).
 - `npm install` — pour `@orbisite/blocks`, un token GitHub Packages (`GITHUB_PACKAGES_TOKEN`) peut être requis (voir `.npmrc`).
 
 ## Configuration
 
-1. **Par défaut** (`npm run dev` sans `VITE_*` dans `.env.local`) : le site charge l’API depuis GitHub raw [`Orbisite/leo-giraud-api`](https://github.com/Orbisite/leo-giraud-api) (`src/config/remoteData.js`).
-2. **API locale** : `npx serve ../leo-giraud-api -l 8787`, puis décommenter les 4 lignes `VITE_*` dans `.env.local` (voir `.env.example`). Si `.env.local` pointe vers `127.0.0.1` sans serveur lancé, le chargement échoue.
+1. **Par défaut** (`npm run dev` sans `VITE_*` dans `.env.local`) : le site charge l’API depuis GitHub raw [`Orbisite/raito-api`](https://github.com/Orbisite/raito-api) (`src/config/remoteData.js`).
+2. **API locale** : `npx serve ../raito-api -l 8787`, puis décommenter les 4 lignes `VITE_*` dans `.env.local` (voir `.env.example`). Si `.env.local` pointe vers `127.0.0.1` sans serveur lancé, le chargement échoue.
 3. **Autre dépôt / branche** : définir les 4 `VITE_*` vers vos URLs raw.
 
 ## Scripts
@@ -23,10 +23,10 @@ Application **Vite + React** — portfolio **Leo Giraud** (artiste 3D), basée s
 
 ## Déploiement (GitHub Pages)
 
-URL publique : **`https://orbisite.github.io/leo-giraud/`** (dépôt projet sous le compte `Orbisite`).
+URL publique : **`https://orbisite.github.io/raito/`** (dépôt projet sous le compte `Orbisite`).
 
 1. Sur GitHub : **Settings → Pages → Build and deployment → Source : GitHub Actions** (pas « Deploy from a branch »).
-2. Chaque push sur **`main`** lance le workflow **Deploy GitHub Pages** (`.github/workflows/deploy-pages.yml`), qui build avec `VITE_BASE=/leo-giraud/` et publie `dist`.
+2. Chaque push sur **`main`** lance le workflow **Deploy GitHub Pages** (`.github/workflows/deploy-pages.yml`), qui build avec `VITE_BASE=/raito/` et publie `dist`.
 
 **Manuellement** (branche `gh-pages`, depuis ta machine avec token GitHub Packages pour `npm ci` / `npm install`) :
 
@@ -40,8 +40,8 @@ npm run deploy
 npm run build:gh && npm run preview
 ```
 
-Mettre à jour `canonicalUrl` et `og.url` dans `leo-giraud-api/site.json` avec `https://orbisite.github.io/leo-giraud/`.
+Mettre à jour `canonicalUrl` et `og.url` dans `raito-api/site.json` avec `https://orbisite.github.io/raito/`.
 
 ## Dossier du projet
 
-Le répertoire doit s’appeler **`leo-giraud`**. S’il reste **`leo-giraud-site`** (ancien nom), arrête le serveur de dev, ferme l’IDE sur ce dossier, puis renomme : `leo-giraud-site` → `leo-giraud`.
+Le dépôt GitHub du site doit s’appeler **`raito`** (dossier local **`raito`** dans ce monorepo).

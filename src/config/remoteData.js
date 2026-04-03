@@ -1,8 +1,8 @@
 /**
- * URLs du dépôt leo-giraud-api. Surchargées par `.env.local` (VITE_*).
- * Valeurs par défaut : branche main du dépôt `leo-giraud-api` sous le compte **Orbisite** (à adapter).
+ * URLs du dépôt raito-api. Surchargées par `.env.local` (VITE_*).
+ * Valeurs par défaut : branche main du dépôt `raito-api` sous le compte **Orbisite** (à adapter).
  */
-const RAW_BASE = 'https://raw.githubusercontent.com/Orbisite/leo-giraud-api/main'
+const RAW_BASE = 'https://raw.githubusercontent.com/Orbisite/raito-api/main'
 
 export const CONTENT_URL = import.meta.env.VITE_CONTENT_URL ?? `${RAW_BASE}/content.json`
 

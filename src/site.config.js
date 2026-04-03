@@ -1,5 +1,5 @@
 /**
- * Shell du site Leo Giraud — le contenu marketing reste dans content.json (API).
+ * Shell du site Raito — le contenu marketing reste dans content.json (API).
  */
 export const siteConfig = {
   defaultLocale: 'fr',
@@ -16,7 +16,7 @@ export const siteConfig = {
   },
 
   meta: {
-    title: 'Leo Giraud — Artiste 3D',
+    title: 'Raito — Artiste 3D',
     description: 'Portfolio 3D — personnages, environnements, assets.',
     siteUrl: 'https://example.com',
   },

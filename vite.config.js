@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-/** Pages projet : `https://orbisite.github.io/leo-giraud/` → base `/leo-giraud/`. Local : `/`. */
+/** Pages projet : `https://orbisite.github.io/raito/` → base `/raito/`. Local : `/`. */
 const base = process.env.VITE_BASE ?? '/'
 
 export default defineConfig({
