@@ -105,6 +105,7 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
         imageUrl: images.hero,
         imageAlt: hero.imageAlt,
         overlapFloatingNavbar: true,
+        spaLinkComponent,
       },
     }),
     logoCloud: () => ({
@@ -196,6 +197,7 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
         displayVariant: 'strip',
         color: 'primary',
         sectionPadding: 'default',
+        spaLinkComponent,
       },
     }),
     footer: () => ({

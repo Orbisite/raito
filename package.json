@@ -13,7 +13,7 @@
   "dependencies": {
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
-    "@orbisite/blocks": "github:Orbisite/blocks#v0.2.5",
+    "@orbisite/blocks": "github:Orbisite/blocks#v0.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.28.0"
