@@ -132,6 +132,12 @@ export function getContentScheme() {
   return remoteContentScheme
 }
 
+/** `primary.surface` résolu (API + fallback) pour `theme-color` / fond `html`. */
+export function getPrimarySurface() {
+  const t = remoteThemes ?? fallbackThemes
+  return t.primary.surface
+}
+
 export function setRemoteThemes(next) {
   if (!next) {
     remoteThemes = null
