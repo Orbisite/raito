@@ -52,6 +52,7 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
         name: typeof item.name === 'object' ? resolveForLocale(locale, item.name) : item.name,
         logoSrc: item.logoSrc,
         href: item.href,
+        openInNewTab: item.openInNewTab ?? item.targetBlank,
       }))
     : []
 
@@ -70,7 +71,10 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
       props: {
         logo: nav.logo,
         logoSrc: images.logo,
-        links: nav.links,
+        links: (nav.links ?? []).map((link) => {
+          const { openInNewTab, targetBlank, ...rest } = link
+          return { ...rest, openInNewTab: openInNewTab ?? targetBlank }
+        }),
         ctaText: nav.cta,
         ctaHref: nav.ctaHref ?? '#contact',
         sticky: true,
@@ -83,8 +87,8 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
         onLocaleChange,
         spaLinkComponent,
         logoHref,
-        logoOpenInNewTab: nav.logoOpenInNewTab,
-        ctaOpenInNewTab: nav.ctaOpenInNewTab,
+        logoOpenInNewTab: nav.logoOpenInNewTab ?? nav.logoTargetBlank,
+        ctaOpenInNewTab: nav.ctaOpenInNewTab ?? nav.ctaTargetBlank,
       },
     }),
     hero: () => ({
@@ -108,7 +112,7 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
         imageAlt: hero.imageAlt,
         overlapFloatingNavbar: true,
         spaLinkComponent,
-        ctaOpenInNewTab: hero.ctaOpenInNewTab,
+        ctaOpenInNewTab: hero.ctaOpenInNewTab ?? hero.ctaTargetBlank,
       },
     }),
     logoCloud: () => ({
@@ -201,8 +205,8 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
         color: 'primary',
         sectionPadding: 'default',
         spaLinkComponent,
-        ctaOpenInNewTab: ctaBanner.ctaOpenInNewTab,
-        secondaryCtaOpenInNewTab: ctaBanner.secondaryCtaOpenInNewTab,
+        ctaOpenInNewTab: ctaBanner.ctaOpenInNewTab ?? ctaBanner.ctaTargetBlank,
+        secondaryCtaOpenInNewTab: ctaBanner.secondaryCtaOpenInNewTab ?? ctaBanner.secondaryCtaTargetBlank,
       },
     }),
     footer: () => ({
@@ -216,7 +220,7 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
             footer.links.map((l) => ({
               label: l.label,
               href: l.href ?? '#',
-              openInNewTab: l.openInNewTab,
+              openInNewTab: l.openInNewTab ?? l.targetBlank,
             }))
           : [
               { label: footer.privacy, href: footer.linkHrefs?.privacy ?? '#' },
@@ -228,7 +232,7 @@ export function buildPageConfig(content, locale = 'fr', onLocaleChange = () => {
             footer.socials.map((s) => ({
               label: s.label,
               href: s.href ?? '#',
-              openInNewTab: s.openInNewTab,
+              openInNewTab: s.openInNewTab ?? s.targetBlank,
             }))
           : [],
         color: 'neutral',
